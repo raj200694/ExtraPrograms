@@ -1,0 +1,93 @@
+
+https://www.techiedelight.com/find-index-element-array-cpp/
+
+#include <iostream>
+#include <algorithm>
+using namespace std;
+
+int main()
+{
+	int arr[] = { 6, 3, 5, 2, 8 };
+	int n = sizeof(arr)/sizeof(arr[0]);
+	int elem = 2;
+
+	auto itr = find(arr, arr + n, elem);
+
+	if (itr != end(arr)) {
+		cout << "Element " << elem << " is present at index " 
+			 << distance(arr, itr) << " in the given array";
+	}
+	else {
+		cout << "Element is not present in the given array";
+	}
+
+	return 0;
+  
+  
+  std::distance
+Calculates the number of elements between first and last . If it is a random-access iterator, the function uses operator- to calculate this. Otherwise, the function uses the increase operator ( operator++ ) repeatedly.
+
+
+Method 4 (Use Max-Heap)
+
+Pick first k elements and create a max heap of size k.
+Perform heapify and print the root element.
+Store the next and last element from the array
+Run a loop from k – 1 to n
+Replace the value of element which is got out of the window with new element which came inside the window.
+Perform heapify.
+Print the root of the Heap.
+Time Complexity: Time Complexity of steps 4(a) is O(k), 4(b) is O(Log(k)) and it is in a loop that runs (n – k + 1) times. Hence, the time complexity of the complete algorithm is O((k + Log(k)) * n) i.e. O(n * k).
+filter_none
+edit
+play_arrow
+
+brightness_4
+# Python program to find the maximum for  
+# each and every contiguous subarray of 
+# size k  
+import heapq 
+  
+# Method to find the maximum for each 
+# and every contiguous subarray of s  
+# of size k 
+def max_of_all_in_k(arr, n): 
+    i = 0
+    j = k-1
+      
+    # Create the heap and heapify 
+    heap = arr[i:j + 1] 
+    heapq._heapify_max(heap) 
+      
+    # Print the maximum element from  
+    # the first window of size k 
+    print(heap[0], end =" ") 
+    last = arr[i] 
+    i+= 1
+    j+= 1
+    nexts = arr[j] 
+      
+    # For every remaining element 
+    while j < n: 
+          
+        # Add the next element of the window 
+        heap[heap.index(last)] = nexts 
+          
+        # Heapify to get the maximum  
+        # of the current window 
+        heapq._heapify_max(heap) 
+          
+        # Print the current maximum 
+        print(heap[0], end =" ") 
+        last = arr[i] 
+        i+= 1
+        j+= 1
+        if j < n: 
+            nexts = arr[j] 
+              
+# Driver Function 
+n, k = 10, 3
+arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10] 
+max_of_all_in_k(arr, n) 
+Output:
+3 4 5 6 7 8 9 10
